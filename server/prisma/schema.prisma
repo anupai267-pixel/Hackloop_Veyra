@@ -1,0 +1,257 @@
+// VEYRA Marketplace - Prisma PostgreSQL Schema
+// Strictly enforces relational constraints, serial masking, verification audits, and auction integrity.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String           @id @default(cuid())
+  email                String           @unique
+  googleSub            String?          @unique
+  name                 String
+  avatar               String?
+  role                 String           @default("buyer") // "buyer" | "seller" | "admin"
+  phone                String?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  sellerProfile        SellerProfile?
+  bids                 Bid[]
+  orders               Order[]
+  cartItems            CartItem[]
+  wishlistItems        WishlistItem[]
+  notifications        Notification[]
+  callsInitiated       CallSession[]    @relation("CallerRelation")
+  callsReceived        CallSession[]    @relation("CalleeRelation")
+
+  @@index([email])
+}
+
+model SellerProfile {
+  id             String    @id @default(cuid())
+  userId         String    @unique
+  storeName      String
+  businessRegNo  String?
+  rating         Float     @default(5.0)
+  salesCount     Int       @default(0)
+  isVerified     Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products       Product[]
+}
+
+model Product {
+  id                  String               @id @default(cuid()) // Platform Product ID e.g. VYR-PROD-1001
+  sellerId            String
+  title               String
+  brand               String
+  category            String
+  condition           String               // "new", "used", "refurbished", "collectible"
+  description         String               @db.Text
+  price               Int                  @default(0) // Fixed price in INR (₹)
+  stock               Int                  @default(1)
+  status              String               @default("active") // "active", "paused", "sold", "archived"
+  isAuction           Boolean              @default(false)
+  countryOfOrigin     String?
+  warranty            String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+
+  seller              SellerProfile        @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  images              ProductImage[]
+  identifiers         ProductIdentifier?
+  verification        VerificationRecord?
+  auction             Auction?
+  orderItems          OrderItem[]
+  cartItems           CartItem[]
+  wishlistItems       WishlistItem[]
+
+  @@index([category, status])
+  @@index([sellerId])
+}
+
+model ProductImage {
+  id         String   @id @default(cuid())
+  productId  String
+  url        String
+  isPrimary  Boolean  @default(false)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model ProductIdentifier {
+  id            String   @id @default(cuid())
+  productId     String   @unique
+  manufacturer  String
+  modelNumber   String?  // MPN / Model
+  serialNumber  String?  // Sensitive: Masked in public responses
+  barcode       String?  // GTIN / EAN
+  batchNumber   String?  // Lot number
+  updatedAt     DateTime @updatedAt
+
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model VerificationRecord {
+  id                 String    @id @default(cuid())
+  productId          String    @unique
+  licenceType        String?
+  licenceNumber      String?
+  issuingAuthority   String?
+  documentUrl        String?   // Confidential supporting document
+  status             String    @default("Unverified") // "Unverified", "Verification Pending", "Verified", "Verification Rejected", "Expired"
+  verificationNotes  String?   @db.Text
+  verifiedAt         DateTime?
+  reviewedBy         String?
+  updatedAt          DateTime  @updatedAt
+
+  product            Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Auction {
+  id              String    @id @default(cuid())
+  productId       String    @unique
+  startingPrice   Int       // In INR (₹)
+  currentBid      Int       // In INR (₹)
+  minIncrement    Int       @default(1000)
+  reservePrice    Int?
+  reserveMet      Boolean   @default(false)
+  startsAt        DateTime  @default(now())
+  endsAt          DateTime
+  status          String    @default("live") // "upcoming", "live", "completed", "cancelled"
+  winnerId        String?
+  winningBidId    String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  product         Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  bids            Bid[]
+
+  @@index([status, endsAt])
+}
+
+model Bid {
+  id          String   @id @default(cuid())
+  auctionId   String
+  userId      String
+  amount      Int      // In INR (₹)
+  bidderLabel String   // e.g. "Collector_91 (Verified)"
+  createdAt   DateTime @default(now())
+
+  auction     Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([auctionId, createdAt])
+}
+
+model Order {
+  id                 String      @id @default(cuid())
+  orderNumber        String      @unique // e.g. VYR-ORD-10029
+  userId             String
+  totalAmount        Int         // In INR (₹)
+  shippingAddress    String      @db.Text
+  paymentStatus      String      @default("escrow_held") // "escrow_held", "captured", "refunded", "disputed"
+  fulfilmentStatus   String      @default("pending")     // "pending", "dispatched", "delivered"
+  transactionRef     String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  user               User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items              OrderItem[]
+  payment            Payment?
+
+  @@index([userId, orderNumber])
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  orderId    String
+  productId  String
+  quantity   Int      @default(1)
+  unitPrice  Int      // Price at time of transaction in INR
+
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id])
+}
+
+model Payment {
+  id                String    @id @default(cuid())
+  orderId           String    @unique
+  gateway           String    @default("razorpay")
+  gatewayOrderId    String?
+  gatewayPaymentId  String?
+  gatewaySignature  String?
+  mode              String    @default("test") // "test" | "live"
+  status            String    @default("escrow_secured")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  order             Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model CartItem {
+  id         String   @id @default(cuid())
+  userId     String
+  productId  String
+  quantity   Int      @default(1)
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+}
+
+model WishlistItem {
+  id         String   @id @default(cuid())
+  userId     String
+  productId  String
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+}
+
+model Notification {
+  id         String   @id @default(cuid())
+  userId     String
+  title      String
+  message    String
+  type       String   @default("info")
+  isRead     Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+}
+
+model CallSession {
+  id         String    @id @default(cuid())
+  roomId     String    @unique
+  auctionId  String?
+  callerId   String
+  calleeId   String
+  status     String    @default("pending") // "pending", "active", "completed", "ended"
+  createdAt  DateTime  @default(now())
+  endedAt    DateTime?
+
+  caller     User      @relation("CallerRelation", fields: [callerId], references: [id])
+  callee     User      @relation("CalleeRelation", fields: [calleeId], references: [id])
+
+  @@index([roomId])
+}

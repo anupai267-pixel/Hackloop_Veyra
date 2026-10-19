@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --color-veyra-bg: #FFFFFF;
+  --color-veyra-subtle: #F5F5F5;
+  --color-veyra-text: #171717;
+  --color-veyra-muted: #666666;
+  --color-veyra-btn: #222222;
+  --color-veyra-btn-hover: #383838;
+  --color-veyra-border: #E5E5E5;
+  --color-veyra-input: #FAFAFA;
+  --color-veyra-dark: #151515;
+  --color-veyra-dark-text: #F5F5F5;
+  
+  --color-veyra-success: #15803D;
+  --color-veyra-warning: #B45309;
+  --color-veyra-error: #B91C1C;
+}
+
+/* Strict Design Rule: Zero Gradients across the entire platform */
+* {
+  background-image: none !important;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #171717;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #CCCCCC;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+/* Standardized button styles */
+.btn-primary {
+  background-color: #222222;
+  color: #FFFFFF;
+  border: 1px solid #222222;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-primary:hover {
+  background-color: #383838;
+  border-color: #383838;
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #171717;
+  border: 1px solid #E5E5E5;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-secondary:hover {
+  background-color: #F5F5F5;
+  border-color: #CCCCCC;
+}
+
+.btn-danger {
+  background-color: #B91C1C;
+  color: #FFFFFF;
+  border: 1px solid #B91C1C;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-danger:hover {
+  background-color: #991B1B;
+}
+
+/* Input Fields */
+.input-field {
+  background-color: #FAFAFA;
+  border: 1px solid #E5E5E5;
+  color: #171717;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  width: 100%;
+}
+.input-field:focus {
+  background-color: #FFFFFF;
+  border-color: #171717;
+}
+
+/* Card base */
+.card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+}
