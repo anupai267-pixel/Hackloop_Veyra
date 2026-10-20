@@ -15,17 +15,38 @@ router.post('/google', authRateLimiter, async (req, res) => {
 
     const payload = await verifyGoogleToken(credential);
 
+    if (!prisma) {
+      return res.status(503).json({
+        error: 'Database service is uninitialized. Please ensure DATABASE_URL is configured in server/.env.'
+      });
+    }
+
     let user;
-    if (prisma) {
-      try {
-        user = await prisma.user.upsert({
-          where: { email: payload.email },
-          update: {
-            name: payload.name,
-            avatar: payload.avatar,
+    try {
+      // Find existing user by Google sub identifier or verified email
+      user = await prisma.user.findFirst({
+        where: {
+          OR: [
+            { googleSub: payload.googleSub },
+            { email: payload.email }
+          ]
+        }
+      });
+
+      if (user) {
+        // Repeat sign-in: retrieve existing user and update profile data without creating duplicates
+        user = await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            name: payload.name || user.name,
+            avatar: payload.avatar || user.avatar,
             googleSub: payload.googleSub
-          },
-          create: {
+          }
+        });
+      } else {
+        // Initial sign-in: create user record persistently in PostgreSQL
+        user = await prisma.user.create({
+          data: {
             email: payload.email,
             name: payload.name,
             avatar: payload.avatar,
@@ -33,20 +54,13 @@ router.post('/google', authRateLimiter, async (req, res) => {
             role: 'buyer'
           }
         });
-      } catch (err) {
-        console.warn('[Auth] DB write note:', err.message);
       }
-    }
-
-    // Fallback if DB not reachable
-    if (!user) {
-      user = {
-        id: `USR-${payload.googleSub.slice(0, 8)}`,
-        email: payload.email,
-        name: payload.name,
-        avatar: payload.avatar,
-        role: 'buyer'
-      };
+    } catch (dbErr) {
+      console.error('[Auth] Persistent DB user operation failed:', dbErr.message);
+      return res.status(503).json({
+        error: 'Persistent database storage unavailable. Unable to save or retrieve user account in PostgreSQL.',
+        details: dbErr.message
+      });
     }
 
     // Issue secure HTTP-only cookie

@@ -1,17 +1,29 @@
 // Database Service Layer
 // Manages Prisma ORM client with graceful error resilience when local PostgreSQL is not active.
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 
-let prisma;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-try {
-  prisma = new PrismaClient({
-    log: process.env.NODE_ENV === 'development' ? ['warn', 'error'] : ['error']
-  });
-} catch (err) {
-  console.warn('[DB] PrismaClient initialization note:', err.message);
-  prisma = null;
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config();
+
+let prisma = null;
+
+if (process.env.DATABASE_URL) {
+  try {
+    prisma = new PrismaClient({
+      log: process.env.NODE_ENV === 'development' ? ['warn', 'error'] : ['error']
+    });
+  } catch (err) {
+    console.warn('[DB] PrismaClient initialization note:', err.message);
+    prisma = null;
+  }
 }
 
 export { prisma };

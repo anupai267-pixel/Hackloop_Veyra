@@ -1,20 +1,32 @@
 // Google Identity Services (GIS) Token Verification Service
 // Uses official Google Auth Library to cryptographically verify ID tokens.
 
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { OAuth2Client } from 'google-auth-library';
 import dotenv from 'dotenv';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 dotenv.config();
 
-const googleClientId = process.env.GOOGLE_CLIENT_ID || '';
-let client = null;
-
-if (googleClientId && !googleClientId.includes('your-google-client-id')) {
-  client = new OAuth2Client(googleClientId);
+export function getOAuthClient() {
+  const googleClientId = process.env.GOOGLE_CLIENT_ID || '';
+  if (!googleClientId || googleClientId.includes('your-google-client-id') || googleClientId.includes('your-google-oauth-client-id')) {
+    return null;
+  }
+  return {
+    client: new OAuth2Client(googleClientId),
+    googleClientId
+  };
 }
 
 export async function verifyGoogleToken(idToken) {
-  if (!client || !googleClientId || googleClientId.includes('your-google-client-id')) {
+  const oauth = getOAuthClient();
+  if (!oauth) {
     throw new Error(
       'Google OAuth Client ID is not configured on the server. Please set GOOGLE_CLIENT_ID in server/.env.'
     );
@@ -25,9 +37,9 @@ export async function verifyGoogleToken(idToken) {
   }
 
   try {
-    const ticket = await client.verifyIdToken({
+    const ticket = await oauth.client.verifyIdToken({
       idToken,
-      audience: googleClientId
+      audience: oauth.googleClientId
     });
 
     const payload = ticket.getPayload();

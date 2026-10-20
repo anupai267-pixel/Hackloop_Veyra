@@ -19,15 +19,35 @@ export const SignInPage = () => {
 
   // Render Google Identity Services Button if configured
   useEffect(() => {
-    if (isGoogleConfigured && window.google?.accounts?.id && googleButtonRef.current) {
-      window.google.accounts.id.renderButton(googleButtonRef.current, {
-        theme: 'outline',
-        size: 'large',
-        text: 'signin_with',
-        shape: 'rectangular',
-        width: 320
-      });
+    if (!isGoogleConfigured) return;
+
+    let timer = null;
+    const renderGisButton = () => {
+      if (window.google?.accounts?.id && googleButtonRef.current) {
+        googleButtonRef.current.innerHTML = '';
+        window.google.accounts.id.renderButton(googleButtonRef.current, {
+          theme: 'outline',
+          size: 'large',
+          text: 'signin_with',
+          shape: 'rectangular',
+          width: 320
+        });
+        return true;
+      }
+      return false;
+    };
+
+    if (!renderGisButton()) {
+      timer = setInterval(() => {
+        if (renderGisButton()) {
+          clearInterval(timer);
+        }
+      }, 200);
     }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
   }, [isGoogleConfigured]);
 
   const handleDemoSignIn = (role) => {
