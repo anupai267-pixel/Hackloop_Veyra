@@ -1,0 +1,576 @@
+{
+  "users": [
+    {
+      "id": "USR-BYR-101",
+      "email": "buyer.demo@veyra.in",
+      "name": "Devansh Verma",
+      "role": "buyer",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      "phone": "+91 98765 43210",
+      "createdAt": "2026-01-15T00:00:00.000Z",
+      "updatedAt": "2026-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "USR-SEL-501",
+      "email": "seller.demo@veyra.in",
+      "name": "Acoustic Vault Retail",
+      "role": "seller",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+      "phone": "+91 98112 23344",
+      "storeName": "Acoustic Vault & Vintage Horology",
+      "businessRegNo": "DEMO-GSTIN-07AAAAA0000A1Z5",
+      "rating": 4.95,
+      "salesCount": 420,
+      "createdAt": "2026-01-10T00:00:00.000Z",
+      "updatedAt": "2026-01-10T00:00:00.000Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "VYR-PROD-1001",
+      "sellerId": "USR-SEL-501",
+      "title": "Sony WH-1000XM5 Wireless Noise-Cancelling Headphones",
+      "brand": "Sony",
+      "category": "electronics",
+      "condition": "new",
+      "description": "Industry-leading noise cancellation with Auto NC Optimizer, 30-hour battery life, and crystal clear hands-free calling.",
+      "price": 29990,
+      "stock": 8,
+      "status": "active",
+      "isAuction": false,
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "manufacturer": "Sony Corporation",
+      "modelNumber": "WH1000XM5/B",
+      "serialNumber": "DEMO-SN-7849201",
+      "barcode": "DEMO-GTIN-027242923584",
+      "batchNumber": "DEMO-LOT-2026-Q1",
+      "warranty": "1 Year Manufacturer Warranty",
+      "countryOfOrigin": "Malaysia",
+      "verificationStatus": "Verified",
+      "licenceType": "BIS Registration (CRS)",
+      "licenceNumber": "DEMO-LIC-R-41002341",
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-02-01T00:00:00.000Z"
+    },
+    {
+      "id": "VYR-PROD-1002",
+      "sellerId": "USR-SEL-501",
+      "title": "Fujifilm X-T5 Mirrorless Digital Camera (Body Only, Black)",
+      "brand": "Fujifilm",
+      "category": "electronics",
+      "condition": "new",
+      "description": "40.2MP X-Trans CMOS 5 HR sensor, 5-axis in-body image stabilization, 6.2K/30p video in 4:2:2 10-bit internal color.",
+      "price": 169999,
+      "stock": 3,
+      "status": "active",
+      "isAuction": false,
+      "images": [
+        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80"
+      ],
+      "manufacturer": "Fujifilm Corporation",
+      "modelNumber": "X-T5-BLK",
+      "serialNumber": "DEMO-SN-FUJI-99412",
+      "barcode": "DEMO-GTIN-074101204928",
+      "batchNumber": "DEMO-LOT-2026-Q1",
+      "warranty": "2 Year Extended Warranty",
+      "countryOfOrigin": "Japan",
+      "verificationStatus": "Verified",
+      "licenceType": "BIS Registration (CRS)",
+      "licenceNumber": "DEMO-LIC-R-41098231",
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-02-05T00:00:00.000Z"
+    },
+    {
+      "id": "VYR-PROD-1005",
+      "sellerId": "USR-SEL-501",
+      "title": "Vintage Chronograph Reference 2447S \"Carrera\" (1964)",
+      "brand": "Heuer",
+      "category": "collectibles",
+      "condition": "collectible",
+      "description": "Historic manual-wind Valjoux 72 chronograph with pure silver-white star dial and unpolished faceted lugs.",
+      "price": 620000,
+      "stock": 1,
+      "status": "active",
+      "isAuction": true,
+      "images": [
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+      ],
+      "manufacturer": "Ed. Heuer & Co.",
+      "modelNumber": "Ref. 2447S",
+      "serialNumber": "DEMO-SN-HEUER-65492",
+      "barcode": "DEMO-GTIN-UNASSIGNED-VINTAGE",
+      "batchNumber": "DEMO-LOT-1964-PROD",
+      "warranty": "1 Year Vintage Movement Guarantee",
+      "countryOfOrigin": "Switzerland",
+      "verificationStatus": "Verified",
+      "licenceType": "Horological Provenance Extract",
+      "licenceNumber": "DEMO-LIC-TAG-ARCH-1092",
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-02-10T00:00:00.000Z"
+    },
+    {
+      "id": "VYR-PROD-1006",
+      "sellerId": "USR-SEL-501",
+      "title": "Original First Edition \"The Hobbit\" (1937 4th Impression)",
+      "brand": "George Allen & Unwin",
+      "category": "collectibles",
+      "condition": "collectible",
+      "description": "Unrestored collector copy with original publisher cloth, monochrome frontispiece, and foldout map of Wilderland.",
+      "price": 240000,
+      "stock": 1,
+      "status": "active",
+      "isAuction": true,
+      "images": [
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80"
+      ],
+      "manufacturer": "George Allen & Unwin Ltd.",
+      "modelNumber": "First-Edition-Imp4",
+      "serialNumber": "DEMO-SN-FOLIO-1937",
+      "barcode": "DEMO-GTIN-ARCHIVAL-9921",
+      "batchNumber": "DEMO-LOT-1937-PRINT",
+      "warranty": "Certificate of Antiquarian Authenticity",
+      "countryOfOrigin": "United Kingdom",
+      "verificationStatus": "Verified",
+      "licenceType": "Antiquarian Provenance Record",
+      "licenceNumber": "DEMO-LIC-ABA-CERT-4412",
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-02-12T00:00:00.000Z"
+    }
+  ],
+  "auctions": [
+    {
+      "id": "AUC-SIMULTANEOUS-B",
+      "productId": "PROD-B",
+      "startingPrice": 200000,
+      "currentBid": 220000,
+      "minIncrement": 10000,
+      "startsAt": "2026-10-20T05:24:35.389Z",
+      "endsAt": "2026-10-20T05:34:45.389Z",
+      "bidCount": 1,
+      "leadingBidder": "Collector Beta",
+      "bidHistory": [
+        {
+          "id": "BID-1792473889495-ccmd",
+          "auctionId": "AUC-SIMULTANEOUS-B",
+          "userId": "USR-BUYER-2",
+          "bidder": "Collector Beta",
+          "amount": 220000,
+          "bidderLabel": "Bidder_953",
+          "createdAt": "2026-10-20T05:24:49.495Z"
+        }
+      ],
+      "endsAtMs": 1792474485389,
+      "startsAtMs": 1792473875389,
+      "leadingBidderId": "USR-BUYER-2"
+    },
+    {
+      "id": "AUC-SIMULTANEOUS-A",
+      "productId": "PROD-A",
+      "startingPrice": 100000,
+      "currentBid": 125000,
+      "minIncrement": 5000,
+      "startsAt": "2026-10-20T05:24:43.577Z",
+      "endsAt": "2026-10-20T05:34:53.577Z",
+      "bidCount": 2,
+      "leadingBidder": "John Doe",
+      "bidHistory": [
+        {
+          "id": "BID-1792473897685-fhxk",
+          "auctionId": "AUC-SIMULTANEOUS-A",
+          "userId": "USR-BUYER-2",
+          "bidder": "John Doe",
+          "amount": 125000,
+          "bidderLabel": "Bidder_306",
+          "createdAt": "2026-10-20T05:24:57.685Z"
+        },
+        {
+          "id": "BID-1792473893580-zucr",
+          "auctionId": "AUC-SIMULTANEOUS-A",
+          "userId": "USR-BUYER-1",
+          "bidder": "Private Collector",
+          "amount": 115000,
+          "bidderLabel": "Bidder_296",
+          "createdAt": "2026-10-20T05:24:53.580Z"
+        }
+      ],
+      "endsAtMs": 1792474493577,
+      "startsAtMs": 1792473883577,
+      "leadingBidderId": "USR-BUYER-2"
+    },
+    {
+      "id": "SNIPE-AUC-303",
+      "productId": "VYR-PROD-SNIPE",
+      "startingPrice": 20000,
+      "currentBid": 25000,
+      "minIncrement": 1000,
+      "startsAt": "2026-10-20T05:19:31.057Z",
+      "endsAt": "2026-10-20T05:23:41.057Z",
+      "bidCount": 1,
+      "leadingBidder": "Last Second Bidder",
+      "bidHistory": [
+        {
+          "id": "BID-1792473671057-ysc3",
+          "auctionId": "SNIPE-AUC-303",
+          "userId": "USR-SNIPER",
+          "bidder": "Last Second Bidder",
+          "amount": 25000,
+          "bidderLabel": "Bidder_284",
+          "createdAt": "2026-10-20T05:21:11.057Z"
+        }
+      ],
+      "endsAtMs": 1792473821057,
+      "startsAtMs": 1792473571057,
+      "leadingBidderId": "USR-SNIPER"
+    },
+    {
+      "id": "TEST-AUC-101",
+      "productId": "VYR-PROD-TEST",
+      "startingPrice": 50000,
+      "currentBid": 52000,
+      "minIncrement": 2000,
+      "startsAt": "2026-10-20T05:20:56.943Z",
+      "endsAt": "2026-10-20T05:26:06.944Z",
+      "bidCount": 1,
+      "leadingBidder": "Collector Alpha",
+      "bidHistory": [
+        {
+          "id": "BID-1792473666957-yo6v",
+          "auctionId": "TEST-AUC-101",
+          "userId": "USR-001",
+          "bidder": "Collector Alpha",
+          "amount": 52000,
+          "bidderLabel": "Bidder_973",
+          "createdAt": "2026-10-20T05:21:06.957Z"
+        }
+      ],
+      "endsAtMs": 1792473966944,
+      "startsAtMs": 1792473656943,
+      "leadingBidderId": "USR-001"
+    },
+    {
+      "id": "AUC-LIVE-001",
+      "productId": "VYR-PROD-1005",
+      "sellerId": "USR-SEL-501",
+      "title": "Vintage Chronograph Reference 2447S \"Carrera\" (1964)",
+      "startingPrice": 450000,
+      "currentBid": 535000,
+      "minIncrement": 10000,
+      "reservePrice": 500000,
+      "reserveMet": true,
+      "startsAt": "2026-10-20T03:11:36.193Z",
+      "endsAt": "2026-10-20T11:11:36.193Z",
+      "status": "live",
+      "bidCount": 3,
+      "leadingBidder": "Devansh Verma",
+      "leadingBidderId": "USR-BYR-101",
+      "winnerId": null,
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-10-20T03:11:36.193Z"
+    },
+    {
+      "id": "AUC-LIVE-002",
+      "productId": "VYR-PROD-1006",
+      "sellerId": "USR-SEL-501",
+      "title": "Original First Edition \"The Hobbit\" (1937 4th Impression)",
+      "startingPrice": 180000,
+      "currentBid": 215000,
+      "minIncrement": 5000,
+      "reservePrice": 200000,
+      "reserveMet": true,
+      "startsAt": "2026-10-20T03:11:36.193Z",
+      "endsAt": "2026-10-20T13:11:36.193Z",
+      "status": "live",
+      "bidCount": 2,
+      "leadingBidder": "Collector Alpha",
+      "leadingBidderId": "USR-BYR-102",
+      "winnerId": null,
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-10-20T03:11:36.193Z"
+    },
+    {
+      "id": "AUC-SCHED-001",
+      "productId": "VYR-PROD-1002",
+      "sellerId": "USR-SEL-501",
+      "title": "Fujifilm X-T5 Mirrorless Digital Camera (Body Only, Black)",
+      "startingPrice": 130000,
+      "currentBid": 130000,
+      "minIncrement": 2000,
+      "reservePrice": 150000,
+      "reserveMet": false,
+      "startsAt": "2026-10-20T17:11:36.193Z",
+      "endsAt": "2026-10-21T17:11:36.193Z",
+      "status": "upcoming",
+      "bidCount": 0,
+      "leadingBidder": null,
+      "leadingBidderId": null,
+      "winnerId": null,
+      "seller": {
+        "id": "USR-SEL-501",
+        "name": "Acoustic Vault Retail",
+        "rating": 4.95
+      },
+      "createdAt": "2026-10-20T05:11:36.193Z"
+    }
+  ],
+  "bids": [
+    {
+      "id": "BID-1792473897685-fhxk",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-2",
+      "bidder": "John Doe",
+      "amount": 125000,
+      "bidderLabel": "Bidder_306",
+      "createdAt": "2026-10-20T05:24:57.685Z"
+    },
+    {
+      "id": "BID-1792473893580-zucr",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-1",
+      "bidder": "Private Collector",
+      "amount": 115000,
+      "bidderLabel": "Bidder_296",
+      "createdAt": "2026-10-20T05:24:53.580Z"
+    },
+    {
+      "id": "BID-1792473889495-ccmd",
+      "auctionId": "AUC-SIMULTANEOUS-B",
+      "userId": "USR-BUYER-2",
+      "bidder": "Collector Beta",
+      "amount": 220000,
+      "bidderLabel": "Bidder_953",
+      "createdAt": "2026-10-20T05:24:49.495Z"
+    },
+    {
+      "id": "BID-1792473885413-r6yn",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-1",
+      "bidder": "Collector Alpha",
+      "amount": 110000,
+      "bidderLabel": "Bidder_296",
+      "createdAt": "2026-10-20T05:24:45.413Z"
+    },
+    {
+      "id": "BID-1792473781571-o7oz",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-2",
+      "bidder": "John Doe",
+      "amount": 125000,
+      "bidderLabel": "Bidder_306",
+      "createdAt": "2026-10-20T05:23:01.571Z"
+    },
+    {
+      "id": "BID-1792473777503-fkdu",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-1",
+      "bidder": "Private Collector",
+      "amount": 115000,
+      "bidderLabel": "Bidder_296",
+      "createdAt": "2026-10-20T05:22:57.503Z"
+    },
+    {
+      "id": "BID-1792473773424-tv6u",
+      "auctionId": "AUC-SIMULTANEOUS-B",
+      "userId": "USR-BUYER-2",
+      "bidder": "Collector Beta",
+      "amount": 220000,
+      "bidderLabel": "Bidder_953",
+      "createdAt": "2026-10-20T05:22:53.424Z"
+    },
+    {
+      "id": "BID-1792473769359-o2i7",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-1",
+      "bidder": "Collector Alpha",
+      "amount": 110000,
+      "bidderLabel": "Bidder_296",
+      "createdAt": "2026-10-20T05:22:49.359Z"
+    },
+    {
+      "id": "BID-1792473713195-3gu0",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-2",
+      "bidder": "John Doe",
+      "amount": 125000,
+      "bidderLabel": "Bidder_306",
+      "createdAt": "2026-10-20T05:21:53.195Z"
+    },
+    {
+      "id": "BID-1792473709133-r5tz",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-1",
+      "bidder": "Private Collector",
+      "amount": 115000,
+      "bidderLabel": "Bidder_296",
+      "createdAt": "2026-10-20T05:21:49.133Z"
+    },
+    {
+      "id": "BID-1792473705067-ndrb",
+      "auctionId": "AUC-SIMULTANEOUS-B",
+      "userId": "USR-BUYER-2",
+      "bidder": "Collector Beta",
+      "amount": 220000,
+      "bidderLabel": "Bidder_953",
+      "createdAt": "2026-10-20T05:21:45.067Z"
+    },
+    {
+      "id": "BID-1792473700979-lqo1",
+      "auctionId": "AUC-SIMULTANEOUS-A",
+      "userId": "USR-BUYER-1",
+      "bidder": "Collector Alpha",
+      "amount": 110000,
+      "bidderLabel": "Bidder_296",
+      "createdAt": "2026-10-20T05:21:40.979Z"
+    },
+    {
+      "id": "BID-1792473671057-ysc3",
+      "auctionId": "SNIPE-AUC-303",
+      "userId": "USR-SNIPER",
+      "bidder": "Last Second Bidder",
+      "amount": 25000,
+      "bidderLabel": "Bidder_284",
+      "createdAt": "2026-10-20T05:21:11.057Z"
+    },
+    {
+      "id": "BID-1792473666957-yo6v",
+      "auctionId": "TEST-AUC-101",
+      "userId": "USR-001",
+      "bidder": "Collector Alpha",
+      "amount": 52000,
+      "bidderLabel": "Bidder_973",
+      "createdAt": "2026-10-20T05:21:06.957Z"
+    },
+    {
+      "id": "BID-1792473597620-yrrn",
+      "auctionId": "SNIPE-AUC-303",
+      "userId": "USR-SNIPER",
+      "bidder": "Last Second Bidder",
+      "amount": 25000,
+      "bidderLabel": "Bidder_284",
+      "createdAt": "2026-10-20T05:19:57.620Z"
+    },
+    {
+      "id": "BID-1792473593437-lhzn",
+      "auctionId": "TEST-AUC-101",
+      "userId": "USR-001",
+      "bidder": "Collector Alpha",
+      "amount": 52000,
+      "bidderLabel": "Bidder_973",
+      "createdAt": "2026-10-20T05:19:53.437Z"
+    },
+    {
+      "id": "BID-1792473160358-c15r",
+      "auctionId": "SNIPE-AUC-303",
+      "userId": "USR-SNIPER",
+      "bidder": "Last Second Bidder",
+      "amount": 25000,
+      "bidderLabel": "Bidder_284",
+      "createdAt": "2026-10-20T05:12:40.358Z"
+    },
+    {
+      "id": "BID-1792473156241-ueot",
+      "auctionId": "TEST-AUC-101",
+      "userId": "USR-001",
+      "bidder": "Collector Alpha",
+      "amount": 52000,
+      "bidderLabel": "Bidder_973",
+      "createdAt": "2026-10-20T05:12:36.241Z"
+    },
+    {
+      "id": "BID-1792473100488-pfbl",
+      "auctionId": "SNIPE-AUC-303",
+      "userId": "USR-SNIPER",
+      "amount": 25000,
+      "bidderLabel": "Bidder_284",
+      "createdAt": "2026-10-20T05:11:40.488Z"
+    },
+    {
+      "id": "BID-1792473096278-0v1h",
+      "auctionId": "TEST-AUC-101",
+      "userId": "USR-001",
+      "amount": 52000,
+      "bidderLabel": "Bidder_973",
+      "createdAt": "2026-10-20T05:11:36.278Z"
+    },
+    {
+      "id": "BID-1001",
+      "auctionId": "AUC-LIVE-001",
+      "userId": "USR-BYR-102",
+      "amount": 470000,
+      "bidderLabel": "Bidder_742",
+      "createdAt": "2026-10-20T03:41:36.193Z"
+    },
+    {
+      "id": "BID-1002",
+      "auctionId": "AUC-LIVE-001",
+      "userId": "USR-BYR-103",
+      "amount": 510000,
+      "bidderLabel": "Bidder_189",
+      "createdAt": "2026-10-20T04:11:36.193Z"
+    },
+    {
+      "id": "BID-1003",
+      "auctionId": "AUC-LIVE-001",
+      "userId": "USR-BYR-101",
+      "amount": 535000,
+      "bidderLabel": "Bidder_901",
+      "createdAt": "2026-10-20T04:41:36.193Z"
+    },
+    {
+      "id": "BID-2001",
+      "auctionId": "AUC-LIVE-002",
+      "userId": "USR-BYR-101",
+      "amount": 195000,
+      "bidderLabel": "Bidder_901",
+      "createdAt": "2026-10-20T03:41:36.193Z"
+    },
+    {
+      "id": "BID-2002",
+      "auctionId": "AUC-LIVE-002",
+      "userId": "USR-BYR-102",
+      "amount": 215000,
+      "bidderLabel": "Bidder_742",
+      "createdAt": "2026-10-20T04:11:36.193Z"
+    }
+  ],
+  "meetings": [
+    {
+      "id": "MTG-WINNER-TEST",
+      "roomId": "room-submariner-42-01",
+      "auctionId": "AUC-WINNER-TEST",
+      "productId": "PROD-WINNER-TEST",
+      "productTitle": "Rolex Submariner Date",
+      "buyerId": "USR-WINNER-42",
+      "sellerId": "USR-SELLER-01",
+      "winningBid": 750000,
+      "status": "scheduled",
+      "createdAt": "2026-10-20T05:25:01.766Z"
+    }
+  ],
+  "notifications": []
+}

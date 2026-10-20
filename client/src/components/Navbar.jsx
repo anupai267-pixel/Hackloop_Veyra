@@ -47,24 +47,6 @@ export const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-[#E5E5E5]">
-      {/* Top Marketplace Bar */}
-      <div className="bg-[#151515] text-[#F5F5F5] text-xs py-1.5 px-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#15803D]"></span>
-            <span className="font-medium tracking-wide">VEYRA VERIFIED MARKETPLACE</span>
-            <span className="text-[#666666] hidden sm:inline">•</span>
-            <span className="text-[#666666] hidden sm:inline">Encrypted Escrow • Certified Authenticity • Server-Synchronized Live Bidding</span>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-[#666666]">
-            <span className="flex items-center gap-1 text-[#F5F5F5]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#15803D]" />
-              Buyer Protection Guarantee
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">

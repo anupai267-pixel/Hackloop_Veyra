@@ -6,32 +6,33 @@ import { requireAuth } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // POST /api/v1/bids — Server-controlled bid processing
-router.post('/', bidRateLimiter, async (req, res) => {
-  const { auctionId, amount, bidderName } = req.body;
+router.post('/', bidRateLimiter, requireAuth, async (req, res) => {
+  const { auctionId, amount } = req.body;
   const io = req.app.get('io');
 
-  if (!auctionId || !amount || typeof amount !== 'number') {
-    return res.status(400).json({ error: 'Valid auctionId and numeric amount are required.' });
+  if (!auctionId || typeof amount !== 'number' || isNaN(amount)) {
+    return res.status(400).json({ error: 'Valid auctionId and numeric amount in ₹ are required.' });
   }
 
-  // Use authenticated user or requested bidder label
-  const user = req.user || {
-    id: 'USR-ANON-BIDDER',
-    name: bidderName || 'Verified Collector'
-  };
+  // Enforce buyer role: sellers cannot bid on listings
+  if (req.user.role === 'seller') {
+    return res.status(403).json({
+      error: 'Seller accounts cannot place bids. Please sign in as a verified buyer to participate in live auctions.'
+    });
+  }
 
   try {
     const result = await processBid({
       auctionId,
-      userId: user.id,
-      bidderName: user.name,
+      userId: req.user.id,
+      bidderName: req.user.name,
       amount,
       io
     });
 
     res.json({
       success: true,
-      message: 'Bid successfully registered and broadcast to live room.',
+      message: 'Bid successfully registered and broadcast to the auction room.',
       data: result
     });
   } catch (err) {

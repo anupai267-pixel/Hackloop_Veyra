@@ -30,6 +30,8 @@ import orderRoutes from './routes/orders.js';
 import paymentRoutes from './routes/payments.js';
 import verificationRoutes from './routes/verification.js';
 import aiRoutes from './routes/ai.js';
+import meetingRoutes from './routes/meetings.js';
+import notificationRoutes from './routes/notifications.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -92,6 +94,8 @@ app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/payments', paymentRoutes);
 app.use('/api/v1/verification', verificationRoutes);
 app.use('/api/v1/ai', aiRoutes);
+app.use('/api/v1/meetings', meetingRoutes);
+app.use('/api/v1/notifications', notificationRoutes);
 
 // Global 404 Handler
 app.use((req, res) => {

@@ -10,6 +10,11 @@ import { ScheduledAuctionsPage } from './pages/ScheduledAuctionsPage';
 import { WishlistPage } from './pages/WishlistPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { SignInPage } from './pages/SignInPage';
+import { RoleSelectionPage } from './pages/RoleSelectionPage';
+import { BuyerLoginPage } from './pages/BuyerLoginPage';
+import { SellerLoginPage } from './pages/SellerLoginPage';
+import { BuyerRegisterPage } from './pages/BuyerRegisterPage';
+import { SellerRegisterPage } from './pages/SellerRegisterPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SellerDashboardPage } from './pages/SellerDashboardPage';
 import { NewListingPage } from './pages/NewListingPage';
@@ -28,7 +33,12 @@ export function App() {
             <Route path="/scheduled-auctions" element={<ScheduledAuctionsPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signin" element={<RoleSelectionPage />} />
+            <Route path="/login" element={<RoleSelectionPage />} />
+            <Route path="/buyer/login" element={<BuyerLoginPage />} />
+            <Route path="/seller/login" element={<SellerLoginPage />} />
+            <Route path="/buyer/register" element={<BuyerRegisterPage />} />
+            <Route path="/seller/register" element={<SellerRegisterPage />} />
 
             {/* Authenticated Buyer & Seller Views */}
             <Route path="/profile" element={<ProfilePage />} />
